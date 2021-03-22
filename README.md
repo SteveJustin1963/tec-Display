@@ -1,4 +1,4 @@
-# tec-graphics-display
+# tec-Graphics-Display
 
 * VDU (eg EA1978Feb)
 * graphics displays
