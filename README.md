@@ -1,5 +1,8 @@
-# tec-Graphics-Display
+# tec-Display
 
+
+
+* Graphics matrix
 * VDU (eg EA1978Feb)
 * graphics displays
 * OLED display
@@ -13,3 +16,7 @@
 * flip clock
 * incandecent box
 * nixie
+* cnc pen plotter
+* electric typewriter
+* etch a sketch
+* 
