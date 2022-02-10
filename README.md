@@ -6,7 +6,7 @@
 * VDU (eg EA1978Feb)
 * graphics displays
 * OLED display
-* pixxiLCD-13P2-CTP-CLB TFT LCD Colour Display
+* pixxiLCD-13P2-CTP-CLB TFT LCD Colour Display https://4dsystems.com.au/pixxilcd-13p2-ctp-clb
 * vfd display
 * LED
 * NE2
