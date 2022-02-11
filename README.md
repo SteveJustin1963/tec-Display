@@ -20,3 +20,5 @@
 * Etch a Sketch https://en.wikipedia.org/wiki/Etch_A_Sketch
 * Tyco Doodle Dome https://makezine.com/2006/12/21/digitized-doodle-dome/  https://picclick.com/Vintage-Tyco-Doodle-Dome-172621314741.html
 * CRT Display
+* https://www.industrialalchemy.org/tubepage.php?item=10&user=0
+* 
