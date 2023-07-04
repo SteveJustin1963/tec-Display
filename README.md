@@ -14,7 +14,7 @@
 - Flip Clock
 - Incandescent 7-SEGMENT DISPLAY https://hackaday.com/2018/11/06/soviet-era-7-segment-display-built-like-a-tank/
 - Nixie tube https://en.wikipedia.org/wiki/Nixie_tube
-- CNC pen plotter
+- [CNC pen plotter](https://github.com/SteveJustin1963/tec-CNC-PEN)
 - Electric Typewriter
 - Etch a Sketch https://en.wikipedia.org/wiki/Etch_A_Sketch
 - Tyco Doodle Dome https://makezine.com/2006/12/21/digitized-doodle-dome/  https://picclick.com/Vintage-Tyco-Doodle-Dome-172621314741.html
