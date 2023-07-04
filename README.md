@@ -3,7 +3,7 @@
 
 - Graphics displays, segment and matrix
 - VDU (eg EA1978Feb)
-- OLED display
+- [OLED display](https://github.com/SteveJustin1963/tec-OLED)
 - pixxiLCD-13P2-CTP-CLB TFT LCD Colour Display https://4dsystems.com.au/pixxilcd-13p2-ctp-clb
 - VFD display https://en.wikipedia.org/wiki/Vacuum_fluorescent_display
 - LED 7-SEGMENT DISPLAY
