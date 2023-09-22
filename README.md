@@ -3,6 +3,10 @@
 
 ## Standard tec1 display
 ### LED 7-SEGMENT DISPLAY
+talking_electronics_11.pdf -p17
+
+
+
 
 
 ### 8x8
