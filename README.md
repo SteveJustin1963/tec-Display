@@ -6,6 +6,8 @@
 talking_electronics_11.pdf -p17
 
 with Mint
+
+experiment
 ```
 :A 1 1\> a@ 2\>;
 :B a@ + a!;
