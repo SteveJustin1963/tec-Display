@@ -5,6 +5,16 @@
 ### LED 7-SEGMENT DISPLAY
 talking_electronics_11.pdf -p17
 
+with Mint
+```
+:A 1 1\> a@ 2\>;
+:B a@ + a!;
+:C 1000();
+:D ABCD;
+
+```
+
+
 
 
 
