@@ -63,8 +63,8 @@ display:
     ret
 ```
 
-////////////////////////
-23.2.2025
+
+23.2.2025 ///////////////////////////////////////////////////////////////
 
 I'll analyze the display-related code from the assembly listing and translate it into a MINT function. The key parts are:
 
