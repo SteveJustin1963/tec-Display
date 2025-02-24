@@ -135,18 +135,54 @@ Here's a simplified version without comments that you can enter directly into MI
 :X c!a!a H b!b c S ;
 ```
 
-To use these functions:
+initialization sequence. These functions need to be loaded in order as they depend on each other:
 
-1. First enter the code exactly as shown above
-2. Then you can display digits using:
-   - Position 0-5 (left to right)
-   - Value 0-F (hex)
-   - Example: `3 #A X` displays 'A' in position 3
+1. First run P to initialize the segment pattern table:
 ```
-100( 3 #A X)
+> :P[#EB#28#CD#AD#2E#A7#E7#29#EF#2F#6F#E6#C3#EC#C7#47]p!
+```
 
-it did something  !
+2. Then run D to initialize the digit select patterns:
+```
+> :D[#20#10#08#04#02#01]d!
+```
 
+3. Then define the S, H and X functions:
+```
+> :S c!b!0 1/O b 2/O d c?1/O 100()0 1/O 0 2/O;
+> :H a!p a?b!b;
+> :X c!a!a H b!b c S;
+```
 
+After that you can start displaying digits:
+```
+> 0 5 X     // Position 0, show "5"
+```
+
+You only need to run P and D once at the start to initialize the tables in memory. After that, you can use X to display digits.
+
+Let's try a complete test sequence:
+
+1. Initialize tables (do once):
+```
+> :P[#EB#28#CD#AD#2E#A7#E7#29#EF#2F#6F#E6#C3#EC#C7#47]p!
+> :D[#20#10#08#04#02#01]d!
+```
+
+2. Define display functions (do once):
+```
+> :S c!b!0 1/O b 2/O d c?1/O 100()0 1/O 0 2/O;
+> :H a!p a?b!b;
+> :X c!a!a H b!b c S;
+```
+
+3. Test display (can do repeatedly):
+```
+> 0 1 X     // Show "1" in position 0
+> 1 2 X     // Show "2" in position 1
+> 2 3 X     // Show "3" in position 2
+```
+
+ 
 
 
