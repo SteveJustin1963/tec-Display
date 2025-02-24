@@ -128,11 +128,11 @@ b c S    // Display segments at position
 Here's a simplified version without comments that you can enter directly into MINT:
 
 ```
-:P[#EB#28#CD#AD#2E#A7#E7#29#EF#2F#6F#E6#C3#EC#C7#47]p!
-:D[#20#10#08#04#02#01]d!
-:S c!b!0 1/O b 2/O d c?1/O 100()0 1/O 0 2/O;
-:H a!p a?b!b;
-:X c!a!a H b!b c S;
+:P[#EB#28#CD#AD#2E#A7#E7#29#EF#2F#6F#E6#C3#EC#C7#47]p! ;
+:D[#20#10#08#04#02#01]d! ;
+:S c!b!0 1/O b 2/O d c?1/O 100()0 1/O 0 2/O ;
+:H a!p a?b!b ;
+:X c!a!a H b!b c S ;
 ```
 
 To use these functions:
