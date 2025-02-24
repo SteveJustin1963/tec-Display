@@ -183,6 +183,10 @@ Let's try a complete test sequence:
 > 2 3 X     // Show "3" in position 2
 ```
 
- 
+it will just flash so place it in a loop
+```
+100(0 1 X)
+```
+
 
 
