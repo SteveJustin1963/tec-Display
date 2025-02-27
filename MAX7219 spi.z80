@@ -1,0 +1,118 @@
+ ; Z80 assembly code example to communicate with the MAX7219 using SPI. 
+; The goal is to replicate the behavior of the `MAX7219Send` function
+; which sends data to the MAX7219 over SPI, controlling multiple daisy-chained displays.
+; maybe this Z80 code bit-bangs SPI communication to control the MAX7219 chips, 
+; allowing you to interface your Z80 system with LED displays easily or not lol.
+
+
+This Z80 routine assumes the following:
+1. **SPI Connections**:
+   - MOSI (Master Out Slave In) -> Data pin of MAX7219.
+   - SCK (Serial Clock) -> Clock pin of MAX7219.
+   - CS (Chip Select/LOAD) -> LOAD pin of MAX7219.
+   
+2. **Bit-Banging SPI**: Since the Z80 has no built-in SPI, we manually control the SPI pins via I/O ports.
+
+---
+
+### **Z80 SPI Communication Routine for MAX7219**
+
+```assembly
+; Port definitions (adjust as necessary for your setup)
+CS_PIN      EQU 0x10   ; Chip Select / LOAD (connected to pin 10)
+MOSI_PIN    EQU 0x11   ; Master Out Slave In (Data)
+SCK_PIN     EQU 0x12   ; Serial Clock
+
+; SPI Helper macros to set/reset pins
+SET_CS:      LD A, 0x01  ; Set CS/LOAD HIGH
+             OUT (CS_PIN), A
+             RET
+
+CLR_CS:      LD A, 0x00  ; Set CS/LOAD LOW
+             OUT (CS_PIN), A
+             RET
+
+SET_SCK:     LD A, 0x01  ; Set Clock HIGH
+             OUT (SCK_PIN), A
+             RET
+
+CLR_SCK:     LD A, 0x00  ; Set Clock LOW
+             OUT (SCK_PIN), A
+             RET
+
+SEND_BIT:    OUT (MOSI_PIN), A  ; Send data bit via MOSI
+             RET
+
+; Send one byte over SPI
+SPI_SEND_BYTE:
+    LD B, 8              ; 8 bits per byte
+SPI_LOOP:
+    SLA C                ; Shift left to get the next bit of data in C
+    JR NC, BIT_LOW       ; If the bit is 0, jump to BIT_LOW
+
+BIT_HIGH:
+    LD A, 0x01           ; Set data bit to 1
+    CALL SEND_BIT
+    JR SEND_CLOCK
+
+BIT_LOW:
+    LD A, 0x00           ; Set data bit to 0
+    CALL SEND_BIT
+
+SEND_CLOCK:
+    CALL SET_SCK         ; Clock HIGH
+    CALL CLR_SCK         ; Clock LOW
+
+    DJNZ SPI_LOOP        ; Repeat for all bits
+    RET
+
+; MAX7219 Send Routine - Sends an address and value to the MAX7219
+MAX7219_SEND:
+    CALL CLR_CS          ; CS/LOAD LOW to start
+
+    ; Send address byte
+    LD C, A              ; Address byte in A -> C
+    CALL SPI_SEND_BYTE
+
+    ; Send data byte
+    LD C, D              ; Data byte in D -> C
+    CALL SPI_SEND_BYTE
+
+    CALL SET_CS          ; CS/LOAD HIGH to load data into MAX7219
+    RET
+
+; Example usage - Send address 0x01 and value 0x7E to display "1"
+START:
+    LD A, 0x01           ; Address byte (register for digit 0)
+    LD D, 0x7E           ; Value byte (segments to display "1")
+    CALL MAX7219_SEND    ; Send to MAX7219
+
+    HALT                 ; Halt the program
+```
+
+---
+
+### **Explanation:**
+
+1. **Port Control**:  
+   The SPI communication is done by controlling the `MOSI`, `SCK`, and `CS/LOAD` pins. In this example, we use Z80 I/O instructions (`OUT`) to manipulate the pins.
+
+2. **Bit-Banging SPI**:  
+   Since the Z80 doesn’t have hardware SPI, we manually shift out each bit from the data byte using a loop. Each bit is sent over the `MOSI` line, followed by a clock pulse (`SCK` HIGH → LOW).
+
+3. **MAX7219 Communication**:  
+   - First, the **CS/LOAD pin is pulled LOW** to start communication.
+   - Then, the **address byte** (which register to write to) is sent.
+   - Next, the **value byte** (which segments to light up) is sent.
+   - Finally, the **CS/LOAD pin is pulled HIGH** to load the data into the MAX7219 registers.
+
+4. **Example Usage**:  
+   In the `START` section, the routine sends `0x7E` (which lights up segments to form the digit "1") to **register 0x01** of the MAX7219.
+
+---
+
+### **How to Expand for Multiple MAX7219s:**
+
+You can modify the `MAX7219_SEND` routine to send multiple address-value pairs in a row for **daisy-chained MAX7219s**. Just repeat the calls to `SPI_SEND_BYTE` within the loop for each pair of address and data bytes.
+
+---
